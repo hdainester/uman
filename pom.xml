@@ -4,7 +4,7 @@
   <groupId>eu.zoho.chaotx</groupId>
   <artifactId>uman</artifactId>
   <packaging>jar</packaging>
-  <version>0.0.1</version>
+  <version>0.1.0</version>
   <name>uman</name>
   <url>http://maven.apache.org</url>
 
@@ -27,4 +27,34 @@
       <version>0.1.0</version>
     </dependency>
   </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-source</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>
 </project>

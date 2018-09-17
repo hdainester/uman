@@ -9,8 +9,8 @@ import eu.zoho.chaotx.crypt.EncryptFunction;
 import eu.zoho.chaotx.crypt.Encryptor;
 
 /**
- * This class represents a user.
- * Access to a users data password protected.
+ * This class represents a user with password protected
+ * access to its data.
  * 
  * @see UserManager
  */

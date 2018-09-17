@@ -14,7 +14,7 @@ import java.util.Map;
 
 /**
  * This class offers methods to manage sets
- * of users.
+ * of unique users.
  * 
  * @see User
  */
@@ -78,7 +78,7 @@ public class UserManager implements Serializable {
     }
 
     /**
-     * Loads user all users from disk.
+     * Loads all users from disk.
      * The currently active user map will be
      * overwritten.
      */
