@@ -71,7 +71,7 @@ public class UserManager implements Serializable {
      *  passed password is invalid
      */
     public void login(User user, String password) {
-        if(!(user == userMap.get(user.getUid())))
+        if(user == null || !(user == userMap.get(user.getUid())))
             throw new IllegalArgumentException("User is not registered");
 
         if(!user.isValid(password))
