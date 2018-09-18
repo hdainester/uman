@@ -22,6 +22,7 @@ public class UserManager implements Serializable {
     private static final long serialVersionUID = 1;
     private HashMap<String, User> userMap;
     private File data_file;
+    private User logged_in_user;
 
     /**
      * Constructs a new user manager.
@@ -41,14 +42,14 @@ public class UserManager implements Serializable {
     /**
      * Adds a new user to the user map.
      * 
-     * @param u new user
+     * @param user new user
      */
-    public void addUser(User u) {
-        if(userMap.containsKey(u.getUid()))
+    public void addUser(User user) {
+        if(userMap.containsKey(user.getUid()))
             throw new IllegalArgumentException(
-                "user '" + u.getUid() + "' already registered");
+                "user '" + user.getUid() + "' already registered");
 
-        userMap.put(u.getUid(), u);
+        userMap.put(user.getUid(), user);
     }
 
     /**
@@ -58,6 +59,42 @@ public class UserManager implements Serializable {
      */
     public Map<String, User> getUserMap() {
         return Collections.unmodifiableMap(userMap);
+    }
+
+    /**
+     * Sets passed user as logged in user.
+     * 
+     * @param user user to login
+     * @param password password of the user
+     * @throws IllegalArgumentException if user
+     *  is not registered within the userMap or
+     *  passed password is invalid
+     */
+    public void login(User user, String password) {
+        if(!(user == userMap.get(user.getUid())))
+            throw new IllegalArgumentException("User is not registered");
+
+        if(!user.isValid(password))
+            throw new IllegalArgumentException("Invalid password");
+
+        logged_in_user = user;
+    }
+
+    /**
+     * Logs out currently logged in user.
+     */
+    public void logout() {
+        logged_in_user = null;
+    }
+
+    /**
+     * Retrieves the currently logged in user.
+     * 
+     * @return logged in user or null if no user
+     *  is logged in
+     */
+    public User getLoggedInUser() {
+        return logged_in_user;
     }
 
     /**
