@@ -11,19 +11,21 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Observable;
 
 /**
- * This class offers methods to manage sets
- * of unique users.
+ * This observable class offers methods to manage sets
+ * of unique users. Observers are notified on user
+ * login/logout.
  * 
  * @see User
  */
-public class UserManager implements Serializable {
+public class UserManager extends Observable implements Serializable {
     private static final long serialVersionUID = 1;
     private HashMap<String, User> userMap;
-    private File data_file;
     private User logged_in_user;
-
+    private File data_file;
+    
     /**
      * Constructs a new user manager.
      * The file at <i>data_file_path</i> will be used to
@@ -63,6 +65,8 @@ public class UserManager implements Serializable {
 
     /**
      * Sets passed user as logged in user.
+     * This method notifies observers on
+     * success.
      * 
      * @param user user to login
      * @param password password of the user
@@ -78,13 +82,18 @@ public class UserManager implements Serializable {
             throw new IllegalArgumentException("Invalid password");
 
         logged_in_user = user;
+        setChanged();
+        notifyObservers(user);
     }
 
     /**
-     * Logs out currently logged in user.
+     * Logs out currently logged in user
+     * and notifies observers.
      */
     public void logout() {
         logged_in_user = null;
+        setChanged();
+        notifyObservers();
     }
 
     /**

@@ -120,4 +120,9 @@ public class User implements Serializable {
     public boolean isValid(String password) {
         return encryptor.createToken(password, tlen).equals(token);
     }
+
+    @Override
+    public String toString() {
+        return getUid();
+    }
 }
